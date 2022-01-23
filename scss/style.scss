@@ -1,0 +1,236 @@
+@charset 'utf-8';
+
+@import 'reset.scss';
+
+/* you can experiment with these */
+$width: 180px;
+$height: 180px;
+$nestedWidth: 400px; /* try auto */
+$paddingTop: 35px;
+$paddingRight: 120px;
+$paddingBottom: 60px;
+$paddingLeft: 90px;
+$borderTop: 10px;
+$borderRight: 25px;
+$borderBottom: 20px;
+$borderLeft: 15px;
+$overflow: auto; /* try auto, hidden, scroll, visible */
+
+
+
+
+
+
+/* leave these alone */
+$labelSpacing: 5px;
+$labelWidth: 20px;
+$margin: 5 * $labelSpacing + 4 * $labelWidth;
+$marginLeft: 120px;
+
+$offsetHeight: $borderTop + $paddingTop + $height + $paddingBottom + $borderBottom;
+$offsetWidth: $borderLeft + $paddingLeft + $width + $paddingRight + $borderRight;
+html {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+#content, #overlay, #clone {
+    width: $width;
+    height: $height;
+    padding: $paddingTop $paddingRight $paddingBottom $paddingLeft;
+    border: $borderTop solid cyan;
+    border-right-width: $borderRight;
+    border-bottom-width: $borderBottom;
+    border-left-width: $borderLeft;
+    background: #ffe;
+    overflow: $overflow;
+    margin-top: $margin;
+    margin-left: $margin;
+    text-align: justify;
+}
+#content, #clone {
+    font-size: 12px;
+}
+#clone {
+    position: absolute;
+    top: $margin;
+    left: $margin;
+    margin: 0;
+    opacity: .2;
+    pointer-events: none;
+    border-color: transparent;
+    background: transparent;
+    overflow: visible;
+    width: $width;
+}
+.nested {
+    width: $nestedWidth;
+    background: #eee;
+}
+#overlay {
+    position: absolute;
+    background: transparent;
+    left: 0;
+    top: 0;
+    overflow: visible;
+    height: 0;
+    width: 0;
+    padding: 0;
+    border-color: transparent;
+    &, & * {
+        pointer-events: none;
+    }
+    div {
+        position: absolute;
+        width: $labelWidth;
+        height: $labelWidth;
+        overflow: visible;
+        &[id^="css"] {
+            color: #00c;
+            background: #def;
+            top: -($borderTop + $labelSpacing + $labelWidth);
+            left: -($borderLeft + $labelSpacing + $labelWidth);
+        }
+        &[id^="client"] {
+            color: #c00;
+            background: #fcc;
+            top: -($borderTop + 2 * ($labelSpacing + $labelWidth));
+            left: -($borderLeft + 2 * ($labelSpacing + $labelWidth));
+        }
+        &[id^="scroll"] {
+            color: #080;
+            background: #cfc;
+            top: -($borderTop + 3 * ($labelSpacing + $labelWidth));
+            left: -($borderLeft + 3 * ($labelSpacing + $labelWidth));
+        }
+        &[id^="offset"] {
+            background: #ccc;
+            top: -($borderTop + 4 * ($labelSpacing + $labelWidth));
+            left: -($borderLeft + 4 * ($labelSpacing + $labelWidth));
+        }
+        &[id^="padding"] {
+            background: gold;
+            color: saddlebrown;
+        }
+        &:before, &:after {
+            position: absolute;
+            display: block;
+            z-index: 1;
+            height: 10000px;
+            width: 10000px;
+        }
+        &:before {
+            content: attr(id);
+        }
+        &:after {
+            content: "";
+        }
+        &[id$="Width"]:before {
+            border-left: 1px dashed;
+        }
+        &[id$="Width"]:before, &#paddingRight:before, &#paddingLeft:before {
+            width: 100%;
+            text-align: center;
+        }
+        &[id$="Width"]:after, &#paddingRight:after {
+            border-right: 1px dashed;
+            right: 0;
+        }
+        &#paddingRight:after {
+            top: -($labelSpacing + $borderBottom);
+        }
+        &[id$="Height"]:before {
+            border-top: 1px dashed;
+        }
+        &[id$="Height"]:after, &#paddingBottom:after, &#paddingTop:after  {
+            border-bottom: 1px dashed;
+            bottom: 0;
+        }
+        &#paddingTop:after  {
+            left: -($paddingLeft + $width + $paddingRight + $borderRight + $labelSpacing);
+            opacity: 0;
+            bottom: -1px;
+        }
+        &#paddingTop.scrolled:after  {
+            opacity: 1;
+        }
+        &#paddingBottom:after {
+            left: -($labelSpacing + $borderRight);
+        }
+        &#cssWidth {
+            left: $paddingLeft;
+            width: $width;
+        }
+        &#scrollWidth, &#clientWidth {
+            left: 0;
+        }
+        &#offsetWidth {
+            left: -$borderLeft;
+        }
+        &#cssHeight {
+            top: $paddingTop;
+            height: $height;
+            text-indent: -2em;
+        }
+        &#scrollHeight, &#clientHeight {
+            top: 0;
+            text-indent: -1.5em;
+        }
+        &#offsetHeight {
+            top: -$borderTop;
+        }
+        &#paddingTop {
+            top: 0;
+            height: $paddingTop;
+        }
+        &#paddingBottom {
+            top: $paddingTop + $height;
+            height: $paddingBottom;
+        }
+        &#paddingTop, &#paddingBottom {
+            margin-left: $labelSpacing;
+            left: $offsetWidth - $borderLeft;
+        }
+        &#paddingLeft {
+            left: 0;
+            width: $paddingLeft;
+        }
+        &#paddingRight {
+            left: $paddingLeft + $width;
+            width: $paddingRight;
+        }
+        &#paddingLeft, &#paddingRight {
+            margin-top: $labelSpacing;
+            top: $offsetHeight - $borderTop;
+        }
+        &#cssHeight {
+            line-height: $height / 2;
+        }
+        &#clientHeight {
+            line-height: $height + 2 * $paddingTop;
+        }
+        &#scrollHeight, &#paddingTop {
+            line-height: $paddingTop;
+        }
+        &#paddingBottom {
+            line-height: $paddingBottom;
+        }
+        &#offsetHeight {
+            height: $offsetHeight;
+            line-height: $height / 2 + $paddingTop;
+        }
+        &#offsetWidth {
+            width: $offsetWidth;
+        }
+    }
+}
+#overlay:after {
+    content: "Border";
+    position: absolute;
+    top: $offsetHeight - $borderTop;
+    left: $offsetWidth - $borderLeft;
+    color: #0dd;
+}
+* {
+    -webkit-transition: opacity 1s ease;    
+    transition: opacity 1s ease;
+}

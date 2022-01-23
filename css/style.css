@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+ol, ul {
+  list-style: none; }
+
+a {
+  text-decoration: none; }
+
+/* you can experiment with these */
+/* try auto */
+/* try auto, hidden, scroll, visible */
+/* leave these alone */
+html {
+  font-family: Arial, sans-serif;
+  overflow: hidden; }
+
+#content, #overlay, #clone {
+  width: 180px;
+  height: 180px;
+  padding: 35px 120px 60px 90px;
+  border: 10px solid cyan;
+  border-right-width: 25px;
+  border-bottom-width: 20px;
+  border-left-width: 15px;
+  background: #ffe;
+  overflow: auto;
+  margin-top: 105px;
+  margin-left: 105px;
+  text-align: justify; }
+
+#content, #clone {
+  font-size: 12px; }
+
+#clone {
+  position: absolute;
+  top: 105px;
+  left: 105px;
+  margin: 0;
+  opacity: .2;
+  pointer-events: none;
+  border-color: transparent;
+  background: transparent;
+  overflow: visible;
+  width: 180px; }
+
+.nested {
+  width: 400px;
+  background: #eee; }
+
+#overlay {
+  position: absolute;
+  background: transparent;
+  left: 0;
+  top: 0;
+  overflow: visible;
+  height: 0;
+  width: 0;
+  padding: 0;
+  border-color: transparent; }
+  #overlay, #overlay * {
+    pointer-events: none; }
+  #overlay div {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    overflow: visible; }
+    #overlay div[id^="css"] {
+      color: #00c;
+      background: #def;
+      top: -35px;
+      left: -40px; }
+    #overlay div[id^="client"] {
+      color: #c00;
+      background: #fcc;
+      top: -60px;
+      left: -65px; }
+    #overlay div[id^="scroll"] {
+      color: #080;
+      background: #cfc;
+      top: -85px;
+      left: -90px; }
+    #overlay div[id^="offset"] {
+      background: #ccc;
+      top: -110px;
+      left: -115px; }
+    #overlay div[id^="padding"] {
+      background: gold;
+      color: saddlebrown; }
+    #overlay div:before, #overlay div:after {
+      position: absolute;
+      display: block;
+      z-index: 1;
+      height: 10000px;
+      width: 10000px; }
+    #overlay div:before {
+      content: attr(id); }
+    #overlay div:after {
+      content: ""; }
+    #overlay div[id$="Width"]:before {
+      border-left: 1px dashed; }
+    #overlay div[id$="Width"]:before, #overlay div#paddingRight:before, #overlay div#paddingLeft:before {
+      width: 100%;
+      text-align: center; }
+    #overlay div[id$="Width"]:after, #overlay div#paddingRight:after {
+      border-right: 1px dashed;
+      right: 0; }
+    #overlay div#paddingRight:after {
+      top: -25px; }
+    #overlay div[id$="Height"]:before {
+      border-top: 1px dashed; }
+    #overlay div[id$="Height"]:after, #overlay div#paddingBottom:after, #overlay div#paddingTop:after {
+      border-bottom: 1px dashed;
+      bottom: 0; }
+    #overlay div#paddingTop:after {
+      left: -420px;
+      opacity: 0;
+      bottom: -1px; }
+    #overlay div#paddingTop.scrolled:after {
+      opacity: 1; }
+    #overlay div#paddingBottom:after {
+      left: -30px; }
+    #overlay div#cssWidth {
+      left: 90px;
+      width: 180px; }
+    #overlay div#scrollWidth, #overlay div#clientWidth {
+      left: 0; }
+    #overlay div#offsetWidth {
+      left: -15px; }
+    #overlay div#cssHeight {
+      top: 35px;
+      height: 180px;
+      text-indent: -2em; }
+    #overlay div#scrollHeight, #overlay div#clientHeight {
+      top: 0;
+      text-indent: -1.5em; }
+    #overlay div#offsetHeight {
+      top: -10px; }
+    #overlay div#paddingTop {
+      top: 0;
+      height: 35px; }
+    #overlay div#paddingBottom {
+      top: 215px;
+      height: 60px; }
+    #overlay div#paddingTop, #overlay div#paddingBottom {
+      margin-left: 5px;
+      left: 415px; }
+    #overlay div#paddingLeft {
+      left: 0;
+      width: 90px; }
+    #overlay div#paddingRight {
+      left: 270px;
+      width: 120px; }
+    #overlay div#paddingLeft, #overlay div#paddingRight {
+      margin-top: 5px;
+      top: 295px; }
+    #overlay div#cssHeight {
+      line-height: 90px; }
+    #overlay div#clientHeight {
+      line-height: 250px; }
+    #overlay div#scrollHeight, #overlay div#paddingTop {
+      line-height: 35px; }
+    #overlay div#paddingBottom {
+      line-height: 60px; }
+    #overlay div#offsetHeight {
+      height: 305px;
+      line-height: 125px; }
+    #overlay div#offsetWidth {
+      width: 430px; }
+
+#overlay:after {
+  content: "Border";
+  position: absolute;
+  top: 295px;
+  left: 415px;
+  color: #0dd; }
+
+* {
+  -webkit-transition: opacity 1s ease;
+  transition: opacity 1s ease; }
+
+/*# sourceMappingURL=style.css.map */
